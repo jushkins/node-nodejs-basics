@@ -1,4 +1,4 @@
-import path from 'path';
+import path, {dirname} from 'path';
 import { release, version } from 'os';
 import { createServer as createServerHttp } from 'http';
 import { fileURLToPath } from 'node:url';
@@ -9,8 +9,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 let unknownObject;
-import a from './files/a.json'
-import b from './files/b.json'
+import a from './files/a.json' assert { type: "json" };
+import b from './files/b.json' assert { type: "json" };
 if (random > 0.5) {
     unknownObject = a
 } else {
