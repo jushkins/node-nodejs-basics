@@ -1,8 +1,13 @@
-// n should be received from main thread
-const nthFibonacci = (n) => n < 2 ? n : nthFibonacci(n - 1) + nthFibonacci(n - 2);
+const nthFibonacci = (number) => number < 2 ? number : nthFibonacci(number - 1) + nthFibonacci(number - 2);
 
-const sendResult = () => {
-    // This function sends result of nthFibonacci computations to main thread
+const sendResult = (result) => {
+  process.send(result);
 };
 
-sendResult();
+process.on('message', (number) => {
+  const result = {
+    status: 'resolved',
+    data: nthFibonacci(number)
+  };
+  sendResult(result);
+});
